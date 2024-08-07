@@ -108,7 +108,7 @@ let write_t acc { dv; di; der } =
   let dv = S.map (rename acc) dv in
   let di = S.map (rename acc) di in
   let der = S.map (rename acc) der in
-  { dv; di; der }, acc
+  { Defnames.empty with dv; di; der }, acc
 
 let type_expression acc ty = ty, acc
 

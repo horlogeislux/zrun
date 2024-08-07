@@ -25,7 +25,7 @@ let main file =
     let modname = String.capitalize_ascii (Filename.basename filename) in
     let n_steps = !Misc.number_of_steps in
     let l_names = !Misc.main_nodes in
-    Eval.main modname filename n_steps !Misc.all l_names
+    Eval.main modname filename n_steps !Misc.all (Format.std_formatter) l_names
   else raise (Arg.Bad "Expected *.zls file.")
 
 let doc_main = "\tThe main node to evaluate"

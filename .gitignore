@@ -6,3 +6,4 @@
 *.output
 .merlin
 _build/
+.DS_Store

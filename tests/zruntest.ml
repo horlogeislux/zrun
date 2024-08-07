@@ -38,7 +38,7 @@ let good_one filename =
   (* Modules.clear (); *)
   let modname = String.capitalize_ascii (Filename.basename filename) in
   (* evaluate all functions whose input is () *)
-  Eval.main modname filename n_steps is_all []
+  Eval.main modname filename n_steps is_all Format.std_formatter []
 
 exception Error
 

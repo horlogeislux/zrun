@@ -8,5 +8,6 @@
   oprinter ; the printer
   ocamlprinter ; print OCaml code
   )
- (libraries zrun.global_lib typdefs_lib)
- (flags (:standard -open Global_lib)))
+ (libraries zelus.compat zrun.global_lib typdefs_lib)
+ (flags
+  (:standard -open Zelus_compat -open Global_lib)))

@@ -35,9 +35,18 @@ let find_value_i_opt x env =
   let* { cur; reinit } = Env.find_opt x env in
   let* cur = cur in return (cur, reinit)
 
+(* when receiving code from the Zelus compiler,
+  operations are prefixed by "Stdlib." *)
+let clear_stdlib (x : Lident.t) : Lident.t =
+  match x with
+  | Name s -> Name s
+  | Modname { qual="Stdlib"; id } -> Name id
+  | Modname { qual; id } -> Modname { qual; id }
+
 let find_gvalue_opt x env =
   try
-    let { Genv.info } = Genv.find_value x env in
+    (* let { Genv.info } = Genv.find_value x env in *)
+    let { Genv.info } = Genv.find_value (clear_stdlib x) env in
     return info
   with
   | Not_found -> none

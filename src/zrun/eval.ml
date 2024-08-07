@@ -67,9 +67,8 @@ let do_step comment output step input =
   o
 
 (* Evaluate all the definition in a file, store values *)
-let main modname filename n_steps is_all l_names =
+let main ?(ast:unit Global_lib.Zelus.implementation list option = None) modname filename n_steps is_all ff l_names =
   let open Genv in
-  let ff = Format.std_formatter in
   (* output file in which values are stored *)
   let obj_name = filename ^ ".zlo" in
   let otc = open_out_bin obj_name in
@@ -79,7 +78,7 @@ let main modname filename n_steps is_all l_names =
   Location.initialize source_name;
 
   (* Parsing *)
-  let p = parse_implementation_file source_name in
+  let p = if Option.is_some ast then [] else parse_implementation_file source_name in
   Debug.print_message "Parsing done";
 
   (* defines the initial global environment for values *)
@@ -88,7 +87,9 @@ let main modname filename n_steps is_all l_names =
   let genv0 = Genv.add_module genv0 Primitives.stdlib_env in
   
   (* Associate unique index to variables *)
-  let p = do_step "Scoping done" Debug.print_program Scoping.program p in
+  let p = if Option.is_some ast then
+    Global_lib.Zelus.{p_impl_list = Option.get ast; p_index = 0}
+  else (do_step "Scoping done" Debug.print_program Scoping.program p) in
   (* Write defined variables for equations *)
   let p = do_step "Write done" Debug.print_program Write.program p in
 
@@ -101,5 +102,6 @@ let main modname filename n_steps is_all l_names =
 
   (* evaluate a list of main function/nodes *)
   if is_all then Coiteration.all ff n_steps (Genv.current genv)
-  else Coiteration.eval_list ff n_steps genv l_names
+  else Coiteration.eval_list ff n_steps genv l_names;
+  close_in Location.(!input_chan)
 

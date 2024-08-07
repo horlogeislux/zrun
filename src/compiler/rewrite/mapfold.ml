@@ -315,7 +315,7 @@ and write_t funs acc { dv; di; der } =
   let dv = Ident.S.map rename dv in
   let di = Ident.S.map rename di in
   let der = Ident.S.map rename der in
-  { dv; di; der }, acc
+  { Defnames.empty with dv; di; der }, acc
 
 let default_t f acc d =
   match d with

@@ -19,9 +19,9 @@
   forloop ; evaluation functions for for loops
   eval ; evaluation of an expression
   )
- (libraries zrun.parse_lib zrun.global_lib)
+ (libraries zelus.compat zrun.parse_lib zrun.global_lib)
  (flags
-  (:standard -open Parse_lib -open Global_lib)))
+  (:standard -open Zelus_compat -open Parse_lib -open Global_lib)))
 
 (executable
  (name zrun)

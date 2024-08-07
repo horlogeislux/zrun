@@ -14,6 +14,6 @@
   global ; definition of entries in the global type environment
   modules ; global symbol table for typing
   )
- (libraries zrun.global_lib)
+ (libraries zelus.compat zrun.global_lib)
  (flags
-  (:standard -open Parse_lib -open Global_lib)))
+  (:standard -open Zelus_compat -open Parse_lib -open Global_lib)))

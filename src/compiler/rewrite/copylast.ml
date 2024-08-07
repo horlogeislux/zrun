@@ -166,7 +166,7 @@ let write_it funs ({ renaming } as acc) { dv; di; der } =
   let dv = S.map rename dv in
   let di = S.map rename di in
   let der = S.map rename der in
-  { dv; di; der }, acc
+  { Defnames.empty with dv; di; der }, acc
   
 let e_local l_renaming e =
   (* add extra local declarations *)

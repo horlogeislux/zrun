@@ -2472,8 +2472,9 @@ let eval ff n_steps name v =
      begin match f_kind with
      | Knode _ ->
         let si = catch (instance f_loc c) in
-        Format.fprintf ff
-          "@[val %s() for %d steps = @.@]" name n_steps;
+        if !verbose then 
+        (Format.fprintf ff
+          "@[val %s() for %d steps = @.@]" name n_steps);
         eval_node Location.no_location (Output.value_flush ff) n_steps si void
      | Kfun _ ->
         let v = catch (apply Location.no_location v [void]) in

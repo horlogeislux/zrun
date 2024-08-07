@@ -4,6 +4,6 @@
 (library
  (name global_lib)
  (public_name zrun.global_lib)
- (libraries zrun.parse_lib)
+ (libraries zelus.compat zrun.parse_lib)
  (flags
-  (:standard -open Parse_lib)))
+  (:standard -open Zelus_compat -open Parse_lib)))

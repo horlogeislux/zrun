@@ -4,7 +4,7 @@ zrun.exe:
 	(cd src/zrun; dune build -- zrun.exe)
 
 zwrite.exe:
-	(cd src/compiler; dune build -- zwrite.exe)
+	(cd src/compiler/main; dune build -- zwrite.exe)
 
 zrun.exe.verbose:
 	(cd src/compiler; dune build --verbose -- zrun.exe)
@@ -13,8 +13,8 @@ tests:
 	(cd tests; dune test)
 
 debug:
-	(cd src/compiler; dune build --debug-backtraces --debug-dependency-path -- zrun.bc)
-	(cd src/compiler; dune build --debug-backtraces --debug-dependency-path -- zwrite.bc)
+	(cd src/zrun; dune build --debug-backtraces --debug-dependency-path -- zrun.bc)
+	(cd src/compiler/main; dune build --debug-backtraces --debug-dependency-path -- zwrite.bc)
 
 clean:
 	dune clean;

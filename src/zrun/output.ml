@@ -27,7 +27,7 @@ let rec print_list value ff l =
   match l with
   | [] -> assert false
   | [x] -> value ff x
-  | x :: l -> printf "@[%a,@ %a@]" value x (print_list value) l
+  | x :: l -> fprintf ff "@[%a,@ %a@]" value x (print_list value) l
             
 let rec pvalue ff v =
   match v with

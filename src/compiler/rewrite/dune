@@ -30,5 +30,6 @@
   schedule ; static scheduling
   rewrite ; compose rewriting steps
   )
- (libraries zrun.parse_lib zrun.global_lib zrun.typdefs_lib zrun.zrun_lib)
- (flags (:standard -open Parse_lib -open Global_lib)))
+ (libraries zelus.compat zrun.parse_lib zrun.global_lib zrun.typdefs_lib zrun.zrun_lib)
+ (flags
+  (:standard -open Zelus_compat -open Parse_lib -open Global_lib)))
